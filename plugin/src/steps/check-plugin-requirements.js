@@ -14,7 +14,6 @@ import {
 import fetch from "node-fetch"
 import store from "~/store"
 import { getPersistentCache } from "~/utils/cache"
-import { PKG_NAME } from "../constants"
 
 const parseRange = (range) => {
   const {
@@ -270,10 +269,9 @@ const ensurePluginRequirementsAreMet = async (helpers, _pluginOptions) => {
     helpers.reporter.panic(
       formatLogMessage(
         [
-          `${PKG_NAME} is already installed, and we don't yet support multiple wordpress sources`,
-          ` Follow this issue for updates https://github.com/gatsbyjs/gatsby-source-wordpress-experimental/issues/58`,
-        ].join(`\n`),
-        { useVerboseStyle: true }
+          `Multiple instances of this plugin aren't currently supported.`,
+          `Follow this issue for updates https://github.com/gatsbyjs/gatsby-source-wordpress-experimental/issues/58`,
+        ].join(`\n\n`)
       )
     )
   } else {
