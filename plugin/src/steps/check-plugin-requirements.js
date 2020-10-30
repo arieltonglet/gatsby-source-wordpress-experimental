@@ -259,11 +259,14 @@ ${data.generalSettings.url}/wp-admin/options-permalink.php.
   }
 }
 
+let isWpSourcePluginInstalled = false
+
 const ensurePluginRequirementsAreMet = async (helpers, _pluginOptions) => {
   if (helpers.traceId === `refresh-createSchemaCustomization`) {
     return
   }
-  if (global.isWpSourcePluginInstalled) {
+
+  if (isWpSourcePluginInstalled) {
     helpers.reporter.panic(
       formatLogMessage(
         [
@@ -273,6 +276,8 @@ const ensurePluginRequirementsAreMet = async (helpers, _pluginOptions) => {
         { useVerboseStyle: true }
       )
     )
+  } else {
+    isWpSourcePluginInstalled = true
   }
 
   const {
